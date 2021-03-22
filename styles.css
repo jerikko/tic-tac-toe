@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background: pink;
+    width: 452px;
+    height: 452px;
+    margin: 0 auto;
+    margin-top: 1em;
+}
+
+.box {
+    width: 150px;
+    height: 150px;
+}
+
+.box-one {
+    border-right: black 1px solid;
+    border-bottom: black 1px solid;
+}
+
+.box-one, 
+.box-two, 
+.box-four,
+.box-five {
+    border-right: black 1px solid;
+    border-bottom: black 1px solid;
+}
+
+ .box-three, 
+ .box-six {
+    border-bottom: black 1px solid;
+}
+
+.box-seven, 
+.box-eight {
+    border-right: 1px black solid;
+}
