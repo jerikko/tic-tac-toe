@@ -18,9 +18,9 @@ body {
     height: 150px;
 }
 
-.box-one {
-    border-right: black 1px solid;
-    border-bottom: black 1px solid;
+.box:hover {
+    cursor: pointer;
+    background: blue;
 }
 
 .box-one, 
