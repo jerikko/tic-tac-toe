@@ -2,7 +2,7 @@ const Gameboard = (() => {
     let gameboard = []
     const container = document.querySelector(".container").children
     
-    for (i=0; i<container.length; i++) {
+    for (i = 0; i < container.length; i++) {
         gameboard.push(container[i])
     }
 
@@ -11,7 +11,7 @@ const Gameboard = (() => {
 })()
 
 
-const Player = name => {                    // Factory Function
+const PlayerFactory = name => {                    // Factory Function
     const getName = () => console.log(name)
     return {
         getName,
@@ -19,26 +19,31 @@ const Player = name => {                    // Factory Function
 }
 
 
-const displayController = (() => {
+const displayController = (() => {                  // Module
+
+    const container = document.querySelector(".container").children
+
+
+    Array.from(container).forEach(div => {           // need to convert HTMLCollection to array before using forEach
+        div.addEventListener('click', () => {        // normal 'for' loop works as well
+            div.style.background = 'white'           // for/of loops also works
+            div.textContent = 'X'
+        })
+    })
+    
+
     return {};
 })();
 
-// const calculator = (() => {              // Module
-//     const add = (a, b) => a + b;
-//     const sub = (a, b) => a - b;
-//     const mul = (a, b) => a * b;
-//     const div = (a, b) => a / b;
-//     return {
-//       add,
-//       sub,
-//       mul,
-//       div,
-//     };
-//   })();
+
+
+
+
 
 Gameboard
-let player1 = Player('player1')
-let player2 = Player('player2')
+displayController
+let player1 = PlayerFactory('player1')
+let player2 = PlayerFactory('player2')
 
 player1.getName()
 player2.getName()
