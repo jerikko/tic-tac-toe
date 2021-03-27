@@ -7,6 +7,10 @@ const Gameboard = (() => {
     }
 
     // console.log(gameboard, container)        // test
+
+    return {
+        gameboard,
+    }
     
 })()
 
@@ -24,6 +28,8 @@ const displayController = (() => {                  // Module
     const container = document.querySelector(".container").children
 
     let isXTurn = true;
+    let XArray = []
+    let OArray = []
 
     const takeTurn = function(event) {
 
@@ -31,13 +37,25 @@ const displayController = (() => {                  // Module
         div.style.background = '#595761'         
         if (isXTurn) {
             div.textContent = 'X'
+            XArray.push(div.classList.toString().slice(-1))
         } else {
             div.textContent = 'O'
+            OArray.push(div.classList.toString().slice(-1))
         }
         isXTurn = !isXTurn
         div.style.color = 'white'
 
         div.removeEventListener('mouseup', takeTurn)
+        checkWin()
+
+    }
+
+    const checkWin = () => {
+        console.log(XArray, OArray)
+
+        if (XArray.length + OArray.length == 9) {
+            console.log("It's a tie!")
+        }
     }
 
 
