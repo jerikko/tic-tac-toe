@@ -31,36 +31,125 @@ const displayController = (() => {                  // Module
     let XArray = []
     let OArray = []
 
+    const winningArrays = [
+        [1,2,3],                // 6
+        [1,5,9],                // 15
+        [1,4,7],                // 12
+        [2,5,8],                // 15
+        [3,6,9],                // 18
+        [3,5,7],                // 15
+        [4,5,6],                // 15
+        [7,8,9]                 // 24
+    ]
+
     const takeTurn = function(event) {
 
         let div = event.target
-        div.style.background = '#595761'         
+        div.style.background = '#595761'
+        div.style.cursor = 'default'      
         if (isXTurn) {
             div.textContent = 'X'
-            XArray.push(div.classList.toString().slice(-1))
+            XArray.push(Number(div.classList.toString().slice(-1)))
         } else {
             div.textContent = 'O'
-            OArray.push(div.classList.toString().slice(-1))
+            OArray.push(Number(div.classList.toString().slice(-1)))
         }
         isXTurn = !isXTurn
         div.style.color = 'white'
 
         div.removeEventListener('mouseup', takeTurn)
-        checkWin()
+        div.removeEventListener('mouseover', addHover)
+        div.removeEventListener('mouseout', removeHover)
+
+        if (XArray.length >= 3) checkWin()
 
     }
 
     const checkWin = () => {
-        console.log(XArray, OArray)
+        console.log('X -->', XArray, ' | O -->', OArray)
 
-        if (XArray.length + OArray.length == 9) {
-            console.log("It's a tie!")
+        let XWins
+        let OWins
+        let tieCondition
+        let turnTotal = XArray.length + OArray.length
+
+        if (XArray.includes(1) && XArray.includes(2)) {
+            if (XArray.includes(3)) XWins = true
+        } else if (XArray.includes(1) && XArray.includes(5)) {
+            if (XArray.includes(9)) XWins = true
+        } else if (XArray.includes(1) && XArray.includes(4)) {
+            if (XArray.includes(7)) XWins = true
+        } else if (XArray.includes(2) && XArray.includes(5) && XArray.includes(8)) XWins = true
+        else if (XArray.includes(3) && XArray.includes(6)) {
+            if (XArray.includes(9)) XWins = true
+        } else if (XArray.includes(3) && XArray.includes(5)) {
+            if (XArray.includes(7)) XWins = true
+        } else if (XArray.includes(4) && XArray.includes(5) && XArray.includes(6)) XWins = true
+        else if (XArray.includes(7) && XArray.includes(8) && XArray.includes(9)) XWins = true
+
+        if (OArray.includes(1) && OArray.includes(2)) {
+            if (OArray.includes(3)) OWins = true
+        } else if (OArray.includes(1) && OArray.includes(5)) {
+            if (OArray.includes(9)) OWins = true
+        } else if (OArray.includes(1) && OArray.includes(4)) {
+            if (OArray.includes(7)) OWins = true
+        } else if (OArray.includes(2) && OArray.includes(5) && OArray.includes(8)) OWins = true
+        else if (OArray.includes(3) && OArray.includes(6)) {
+            if (OArray.includes(9)) OWins = true
+        } else if (OArray.includes(3) && OArray.includes(5)) {
+            if (OArray.includes(7)) OWins = true
+        } else if (OArray.includes(4) && OArray.includes(5) && OArray.includes(6)) OWins = true
+        else if (OArray.includes(7) && OArray.includes(8) && OArray.includes(9)) OWins = true
+
+
+
+        if (XWins || OWins) {
+            Array.from(container).forEach(div => {
+                div.removeEventListener('mouseup', takeTurn)
+                div.removeEventListener('mouseover', addHover)       
+                div.removeEventListener('mouseout', removeHover)     
+            })
         }
+
+        if (XWins) {
+            console.log('X wins!')
+        } else if (OWins) {
+            console.log('O wins!')
+        } else if (!XWins && !OWins) {
+            tieCondition = true
+        }
+
+        if (tieCondition && turnTotal == 9) {
+            console.log("It's a tie!")
+            Array.from(container).forEach(div => {
+                div.removeEventListener('mouseup', takeTurn)
+                div.removeEventListener('mouseover', addHover)   
+                div.removeEventListener('mouseout', removeHover)         
+            })
+
+        }
+
+
     }
+
+    const addHover = event => {
+        let div = event.target
+        div.style.cursor = 'pointer'
+        div.style.background = 'blue'
+    }
+
+    const removeHover = event => {
+        let div = event.target
+        div.style.cursor = 'default'
+        div.style.background = 'pink'
+    }
+
 
 
     Array.from(container).forEach(div => {              // need to convert HTMLCollection to array before using forEach --> normal 'for' loop and for/of loop works as well
         div.addEventListener('mouseup', takeTurn)       // REMEMBER: event is automatically passed to function
+        div.addEventListener('mouseover', addHover)
+        div.addEventListener('mouseout', removeHover)
     })
     
 

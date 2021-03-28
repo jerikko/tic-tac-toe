@@ -18,10 +18,15 @@ body {
     height: 150px;
 }
 
-.box:hover {
+/* .box:hover {
     cursor: pointer;
     background: blue;
 }
+
+.removeHover {
+    cursor: none;
+    background: pink;
+} */
 
 .box-1, 
 .box-2, 
