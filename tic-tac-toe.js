@@ -49,13 +49,26 @@ const displayController = (() => {                  // Module
         div.style.cursor = 'default'      
         if (isXTurn) {
             div.textContent = 'X'
+            div.style.fontSize = '3.3rem'
+            div.style.textAlign = 'center'
+            div.style.verticalAlign = 'middle'
+            div.style.lineHeight = '150px'
+            div.style.color = 'whitesmoke'
+            div.style.background = '#000d40'
+            div.style.borderColor = '#000d40'
             XArray.push(Number(div.classList.toString().slice(-1)))
         } else {
             div.textContent = 'O'
+            div.style.fontSize = '3.3rem'
+            div.style.textAlign = 'center'
+            div.style.verticalAlign = 'middle'
+            div.style.lineHeight = '150px'
+            div.style.color = '#000d40'
+            div.style.background = 'whitesmoke'
+            div.style.borderColor = 'whitesmoke'
             OArray.push(Number(div.classList.toString().slice(-1)))
         }
         isXTurn = !isXTurn
-        div.style.color = 'white'
 
         div.removeEventListener('mouseup', takeTurn)
         div.removeEventListener('mouseover', addHover)
@@ -135,13 +148,38 @@ const displayController = (() => {                  // Module
     const addHover = event => {
         let div = event.target
         div.style.cursor = 'pointer'
-        div.style.background = 'blue'
+        if (isXTurn) {
+            div.textContent = 'X'
+            div.style.fontSize = '3.3rem'
+            div.style.textAlign = 'center'
+            div.style.verticalAlign = 'middle'
+            div.style.lineHeight = '150px'
+            div.style.color = 'whitesmoke'
+            div.style.background = '#000d40'
+            div.style.borderColor = '#000d40'
+        } else if (!isXTurn) {
+            div.textContent = 'O'
+            div.style.fontSize = '3.3rem'
+            div.style.textAlign = 'center'
+            div.style.verticalAlign = 'middle'
+            div.style.lineHeight = '150px'
+            div.style.color = '#000d40'
+            div.style.background = 'whitesmoke'
+            div.style.background = 'whitesmoke'
+        }
     }
 
     const removeHover = event => {
         let div = event.target
         div.style.cursor = 'default'
-        div.style.background = 'pink'
+        if (!isXTurn) {
+            div.style.background = 'whitesmoke'
+        } else {
+            div.style.background = '#000d40'
+        }
+        div.textContent = ''
+        div.style.background = 'whitesmoke'
+        div.style.borderColor = 'whitesmoke'
     }
 
 
