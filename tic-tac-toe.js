@@ -87,6 +87,7 @@ const displayController = (() => {                  // Module
         let XWins
         let OWins
         let tieCondition
+        let isGameEnd
         let turnTotal = XArray.length + OArray.length
 
         if (XArray.includes(1) && XArray.includes(2)) {
@@ -120,13 +121,39 @@ const displayController = (() => {                  // Module
 
 
         if (XWins || OWins) {
+
+            isGameEnd = true
             Array.from(container).forEach(div => {
                 div.removeEventListener('mouseup', takeTurn)
                 div.removeEventListener('mouseover', addHover)       
                 div.removeEventListener('mouseout', removeHover)     
             })
 
+        }
 
+        if (XWins) {
+            console.log('X wins!')
+            title.textContent = 'X wins!'
+        } else if (OWins) {
+            console.log('O wins!')
+            title.textContent = 'O wins!'
+        } else if (!XWins && !OWins) {
+            tieCondition = true
+        }
+
+        if (tieCondition && turnTotal == 9) {
+            isGameEnd = true
+            Array.from(container).forEach(div => {
+                div.removeEventListener('mouseup', takeTurn)
+                div.removeEventListener('mouseover', addHover)   
+                div.removeEventListener('mouseout', removeHover)         
+            })
+
+            title.textContent = "Tie game!"
+
+        }
+
+        if (isGameEnd) {
             const resetButton = document.createElement('button')
             resetButton.classList.add('reset')
             resetButton.textContent = 'New game'
@@ -136,31 +163,7 @@ const displayController = (() => {                  // Module
 
 
             motivation.style.display = 'none'
-
         }
-
-        if (XWins) {
-            console.log('X wins!')
-            title.textContent = 'Tic-Tac-Toe: X wins!'
-        } else if (OWins) {
-            console.log('O wins!')
-            title.textContent = 'Tic-Tac-Toe: O wins!'
-        } else if (!XWins && !OWins) {
-            tieCondition = true
-            title.textContent = "Tic-Tac-Toe: It's a tie!!"
-
-        }
-
-        if (tieCondition && turnTotal == 9) {
-            console.log("It's a tie!")
-            Array.from(container).forEach(div => {
-                div.removeEventListener('mouseup', takeTurn)
-                div.removeEventListener('mouseover', addHover)   
-                div.removeEventListener('mouseout', removeHover)         
-            })
-
-        }
-
 
     }
 
