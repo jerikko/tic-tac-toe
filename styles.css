@@ -56,7 +56,7 @@ h1 {
     color: red;
     font-size: 2.4rem;
     padding: 0.8em;
-    border: white solid 1px;
+    /* border: white solid 1px; */
 }
 
 .reset {
