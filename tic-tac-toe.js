@@ -26,6 +26,9 @@ const PlayerFactory = name => {                    // Factory Function
 const displayController = (() => {                  // Module
 
     const container = document.querySelector(".container").children
+    const bottomDiv = document.querySelector(".results")
+    const motivation = document.querySelector(".motivation")
+    const title = document.querySelector(".title")
 
     let isXTurn = true;
     let XArray = []
@@ -122,14 +125,30 @@ const displayController = (() => {                  // Module
                 div.removeEventListener('mouseover', addHover)       
                 div.removeEventListener('mouseout', removeHover)     
             })
+
+
+            const resetButton = document.createElement('button')
+            resetButton.classList.add('reset')
+            resetButton.textContent = 'New game'
+            resetButton.style.font = 'inherit'
+            resetButton.style.type = 'button'
+            bottomDiv.appendChild(resetButton)
+
+
+            motivation.style.display = 'none'
+
         }
 
         if (XWins) {
             console.log('X wins!')
+            title.textContent = 'Tic-Tac-Toe: X wins!'
         } else if (OWins) {
             console.log('O wins!')
+            title.textContent = 'Tic-Tac-Toe: O wins!'
         } else if (!XWins && !OWins) {
             tieCondition = true
+            title.textContent = "Tic-Tac-Toe: It's a tie!!"
+
         }
 
         if (tieCondition && turnTotal == 9) {
