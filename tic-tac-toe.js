@@ -34,16 +34,16 @@ const displayController = (() => {                  // Module
     let XArray = []
     let OArray = []
 
-    const winningArrays = [
-        [1,2,3],                // 6
-        [1,5,9],                // 15
-        [1,4,7],                // 12
-        [2,5,8],                // 15
-        [3,6,9],                // 18
-        [3,5,7],                // 15
-        [4,5,6],                // 15
-        [7,8,9]                 // 24
-    ]
+    // const winningArrays = [
+    //     [1,2,3],                // 6
+    //     [1,5,9],                // 15
+    //     [1,4,7],                // 12
+    //     [2,5,8],                // 15
+    //     [3,6,9],                // 18
+    //     [3,5,7],                // 15
+    //     [4,5,6],                // 15
+    //     [7,8,9]                 // 24
+    // ]
 
     const takeTurn = function(event) {
 
@@ -77,7 +77,7 @@ const displayController = (() => {                  // Module
         div.removeEventListener('mouseover', addHover)
         div.removeEventListener('mouseout', removeHover)
 
-        if (XArray.length >= 3) checkWin()
+        /*if (XArray.length >= 3)*/ checkWin()
 
     }
 
@@ -90,34 +90,55 @@ const displayController = (() => {                  // Module
         let isGameEnd
         let turnTotal = XArray.length + OArray.length
 
-        if (XArray.includes(1) && XArray.includes(2)) {
-            if (XArray.includes(3)) XWins = true
-        } else if (XArray.includes(1) && XArray.includes(5)) {
-            if (XArray.includes(9)) XWins = true
-        } else if (XArray.includes(1) && XArray.includes(4)) {
-            if (XArray.includes(7)) XWins = true
-        } else if (XArray.includes(2) && XArray.includes(5) && XArray.includes(8)) XWins = true
-        else if (XArray.includes(3) && XArray.includes(6)) {
-            if (XArray.includes(9)) XWins = true
-        } else if (XArray.includes(3) && XArray.includes(5)) {
-            if (XArray.includes(7)) XWins = true
-        } else if (XArray.includes(4) && XArray.includes(5) && XArray.includes(6)) XWins = true
-        else if (XArray.includes(7) && XArray.includes(8) && XArray.includes(9)) XWins = true
 
-        if (OArray.includes(1) && OArray.includes(2)) {
-            if (OArray.includes(3)) OWins = true
-        } else if (OArray.includes(1) && OArray.includes(5)) {
-            if (OArray.includes(9)) OWins = true
-        } else if (OArray.includes(1) && OArray.includes(4)) {
-            if (OArray.includes(7)) OWins = true
-        } else if (OArray.includes(2) && OArray.includes(5) && OArray.includes(8)) OWins = true
-        else if (OArray.includes(3) && OArray.includes(6)) {
-            if (OArray.includes(9)) OWins = true
-        } else if (OArray.includes(3) && OArray.includes(5)) {
-            if (OArray.includes(7)) OWins = true
-        } else if (OArray.includes(4) && OArray.includes(5) && OArray.includes(6)) OWins = true
-        else if (OArray.includes(7) && OArray.includes(8) && OArray.includes(9)) OWins = true
+        // X win conditions
+        if (XArray.includes(1)) {
+            if (XArray.includes(2) && XArray.includes(3)) XWins = true
+            if (XArray.includes(5) && XArray.includes(9)) XWins = true
+            if (XArray.includes(4) && XArray.includes(7)) XWins = true
+        }
 
+        if (XArray.includes(2)) {
+            if (XArray.includes(5) && XArray.includes(8)) XWins = true
+        }
+
+        if (XArray.includes(3)) {
+            if (XArray.includes(5) && XArray.includes(7)) XWins = true
+            if (XArray.includes(6) && XArray.includes(9)) XWins = true
+        }
+
+        if (XArray.includes(4)) {
+            if (XArray.includes(5) && XArray.includes(6)) XWins = true
+        }
+
+        if (XArray.includes(7)) {
+            if (XArray.includes(8) && XArray.includes(9)) XWins = true
+        }
+
+
+        // O win conditions
+        if (OArray.includes(1)) {
+            if (OArray.includes(2) && OArray.includes(3)) OWins = true
+            if (OArray.includes(5) && OArray.includes(9)) OWins = true
+            if (OArray.includes(4) && OArray.includes(7)) OWins = true
+        }
+
+        if (OArray.includes(2)) {
+            if (OArray.includes(5) && OArray.includes(8)) OWins = true
+        }
+
+        if (OArray.includes(3)) {
+            if (OArray.includes(5) && OArray.includes(7)) OWins = true
+            if (OArray.includes(6) && OArray.includes(9)) OWins = true
+        }
+
+        if (OArray.includes(4)) {
+            if (OArray.includes(5) && OArray.includes(6)) OWins = true
+        }
+
+        if (OArray.includes(7)) {
+            if (OArray.includes(8) && OArray.includes(9)) OWins = true
+        }
 
 
         if (XWins || OWins) {
