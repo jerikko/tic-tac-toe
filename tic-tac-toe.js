@@ -178,12 +178,34 @@ const displayController = (() => {                  // Module
             const resetButton = document.createElement('button')
             resetButton.classList.add('reset')
             resetButton.textContent = 'New game'
+            resetButton.style.color = 'red'
             resetButton.style.font = 'inherit'
             resetButton.style.type = 'button'
+            resetButton.style.cursor = 'pointer'
             bottomDiv.appendChild(resetButton)
 
-
             motivation.style.display = 'none'
+
+            resetButton.addEventListener('mouseup', () => {
+                console.log('test')
+                isXTurn = true;
+                XArray = []
+                OArray = []
+                Array.from(container).forEach(div => {              // need to convert HTMLCollection to array before using forEach --> normal 'for' loop and for/of loop works as well
+                    div.addEventListener('mouseup', takeTurn)       // REMEMBER: event is automatically passed to function
+                    div.addEventListener('mouseover', addHover)
+                    div.addEventListener('mouseout', removeHover)
+                    div.textContent = ''
+                    div.style.background = 'whitesmoke'
+                    div.style.borderColor = 'whitesmoke'
+
+                    motivation.style.display = 'inline'
+                    resetButton.style.display = 'none'
+                    title.textContent = 'Tic-Tac-Toe'
+                })
+
+            })
+
         }
 
     }
