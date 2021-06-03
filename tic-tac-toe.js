@@ -35,14 +35,14 @@ const displayController = (() => {                  // Module
     let OArray = []
 
     // const winningArrays = [
-    //     [1,2,3],                // 6
-    //     [1,5,9],                // 15
-    //     [1,4,7],                // 12
-    //     [2,5,8],                // 15
-    //     [3,6,9],                // 18
-    //     [3,5,7],                // 15
-    //     [4,5,6],                // 15
-    //     [7,8,9]                 // 24
+    //     [1,2,3],
+    //     [1,5,9],
+    //     [1,4,7],
+    //     [2,5,8],
+    //     [3,6,9],
+    //     [3,5,7],
+    //     [4,5,6],
+    //     [7,8,9]
     // ]
 
     const takeTurn = function(event) {
@@ -71,13 +71,14 @@ const displayController = (() => {                  // Module
             div.style.borderColor = 'whitesmoke'
             OArray.push(Number(div.classList.toString().slice(-1)))
         }
+
         isXTurn = !isXTurn
 
         div.removeEventListener('mouseup', takeTurn)
         div.removeEventListener('mouseover', addHover)
         div.removeEventListener('mouseout', removeHover)
 
-        /*if (XArray.length >= 3)*/ checkWin()
+        if (XArray.length >= 3) checkWin()
 
     }
 
