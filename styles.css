@@ -8,31 +8,44 @@ h1 {
     color: whitesmoke;
     text-align: center;
     font-size: 2.4rem;
+    margin-bottom: 1.7em;
 }
 
-form {
+.form-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     color: whitesmoke;
     text-align: center;
-    margin-bottom: 2.4em;
+    width: 750px;
+    margin: 0 auto 1.7em auto;
+    /* margin-bottom: 1.7em; */
+}
+
+label {
+    color: red;
 }
 
 input {
     font-family: inherit;
+    color: #000d40;
     text-align: center;
     width: 10em;
+    padding: 0.24em;
 }
 
-#player-one-name {
-    margin-top: .8em;
+textarea:focus {        /* IN PROGRES: Trying to remove outline from input textbox */
+    outline: none;
 }
 
-#player-two-name {
+.player-name {
     margin-top: .8em;
 }
 
 .versus {
+    position: relative;
+    left: 650px;
+    bottom: 81px;
+    width: 24px;
     color: red;
     font-size: 1.7rem;
 }

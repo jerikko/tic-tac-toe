@@ -1,29 +1,62 @@
-const Gameboard = (() => {
-    let gameboard = []
-    const container = document.querySelector(".container").children
-    
-    for (i = 0; i < container.length; i++) {
-        gameboard.push(container[i])
-    }
-
-    // console.log(gameboard, container)        // test
-
-    return {
-        gameboard,
-    }
-    
-})()
+const playerNames = document.querySelectorAll(".player-name")
+const forms = document.querySelector(".form-container")
+const playerOneForm = document.querySelector(".player-one")
+const playerTwoForm = document.querySelector(".player-two")
 
 
-const PlayerFactory = name => {                    // Factory Function
+/*  Change inputs to player names with "Enter" */
+Array.from(playerNames).forEach(player => {
+    player.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            console.log(player.value)
+            
+            
+            if (player.id == 1) {
+                const player1 = playerFactory(player.value)
+                player1.getName
+
+                playerOneForm.style.display = 'none'
+                const playerOneName = document.createElement('h2')
+                playerOneName.style.color = 'red'
+
+                playerOneForm.replaceWith(playerOneName)
+                playerOneName.textContent = player.value
+            }
+            if (player.id == 2) {
+                const player2 = playerFactory(player.value)
+                player2.getName
+
+                playerTwoForm.style.display = 'none'
+                const playerTwoName = document.createElement('h2')
+                playerTwoName.style.color = 'red'
+
+
+                playerTwoForm.replaceWith(playerTwoName)
+                playerTwoName.textContent = player.value
+            }
+        }
+    })
+})
+
+
+const playerFactory = name => {                    // Factory Function
     const getName = () => console.log(name)
     return {
+        name,
         getName,
     }
 }
 
+// Clears input boxes on window refresh
+function init() {
+    Array.from(playerNames).forEach(player => {
+        player.value = ''
+    })
+}
 
-const displayController = (() => {                  // Module
+// Module
+const displayController = (() => {
 
     const container = document.querySelector(".container").children
     const bottomDiv = document.querySelector(".results")
@@ -34,16 +67,6 @@ const displayController = (() => {                  // Module
     let XArray = []
     let OArray = []
 
-    // const winningArrays = [
-    //     [1,2,3],
-    //     [1,5,9],
-    //     [1,4,7],
-    //     [2,5,8],
-    //     [3,6,9],
-    //     [3,5,7],
-    //     [4,5,6],
-    //     [7,8,9]
-    // ]
 
     const takeTurn = function(event) {
 
@@ -262,14 +285,6 @@ const displayController = (() => {                  // Module
 
 
 
-
-
-
-Gameboard
 displayController
-let player1 = PlayerFactory('player1')
-let player2 = PlayerFactory('player2')
-
-// player1.getName()        // test
-// player2.getName()        // test
+window.onload = init;
 
