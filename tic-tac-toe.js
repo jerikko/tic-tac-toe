@@ -1,61 +1,65 @@
-const playerNames = document.querySelectorAll(".player-name")
-const forms = document.querySelector(".form-container")
+const playerNames = document.querySelectorAll(".player-name")   // selects both input boxes
 const playerOneForm = document.querySelector(".player-one")
 const playerTwoForm = document.querySelector(".player-two")
+let playerOne = {}
+let playerTwo = {}
 
 
 /*  Change inputs to player names with "Enter" */
 Array.from(playerNames).forEach(player => {
     player.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            e.preventDefault()
-            console.log(player.value)
+            e.preventDefault()      // prevents page refresh
             
             
             if (player.id == 1) {
-                const player1 = playerFactory(player.value)
-                player1.getName
+                playerOne = Object.create(Player(player.value))
 
                 playerOneForm.style.display = 'none'
                 const playerOneName = document.createElement('h2')
+                playerOneName.textContent = playerOne.name
                 playerOneName.style.color = 'red'
+                playerOneName.classList.add('versus-fix')
 
                 playerOneForm.replaceWith(playerOneName)
-                playerOneName.textContent = player.value
             }
             if (player.id == 2) {
-                const player2 = playerFactory(player.value)
-                player2.getName
+                playerTwo = Object.create(Player(player.value))
 
                 playerTwoForm.style.display = 'none'
                 const playerTwoName = document.createElement('h2')
+                playerTwoName.textContent = playerTwo.name
                 playerTwoName.style.color = 'red'
-
+                playerTwoName.classList.add('versus-fix')
 
                 playerTwoForm.replaceWith(playerTwoName)
-                playerTwoName.textContent = player.value
+
             }
         }
     })
 })
 
+// Player Factory Function
+const Player = (name) => {
 
-const playerFactory = name => {                    // Factory Function
-    const getName = () => console.log(name)
+    const getName = () => {
+        console.log(name)
+    }
     return {
         name,
         getName,
     }
 }
 
-// Clears input boxes on window refresh
+
+// Clears input box values on window refresh
 function init() {
     Array.from(playerNames).forEach(player => {
         player.value = ''
     })
 }
 
-// Module
+// displayController Module
 const displayController = (() => {
 
     const container = document.querySelector(".container").children
@@ -68,6 +72,7 @@ const displayController = (() => {
     let OArray = []
 
 
+// function runs when user takes a turn (clicks on a box)
     const takeTurn = function(event) {
 
         let div = event.target
@@ -105,8 +110,8 @@ const displayController = (() => {
 
     }
 
+// checks for win conditions and determines tie after 9 turns 
     const checkWin = () => {
-        console.log('X -->', XArray, ' | O -->', OArray)
 
         let XWins
         let OWins
@@ -234,6 +239,7 @@ const displayController = (() => {
 
     }
 
+// add mouse-over-box hover styling
     const addHover = event => {
         let div = event.target
         div.style.cursor = 'pointer'
@@ -258,6 +264,7 @@ const displayController = (() => {
         }
     }
 
+// remove mouse-over-box hover styling
     const removeHover = event => {
         let div = event.target
         div.style.cursor = 'default'
@@ -272,7 +279,7 @@ const displayController = (() => {
     }
 
 
-
+// Event listeners for taking a turn, and hover events
     Array.from(container).forEach(div => {              // need to convert HTMLCollection to array before using forEach --> normal 'for' loop and for/of loop works as well
         div.addEventListener('mouseup', takeTurn)       // REMEMBER: event is automatically passed to function
         div.addEventListener('mouseover', addHover)

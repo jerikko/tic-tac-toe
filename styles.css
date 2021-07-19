@@ -8,7 +8,8 @@ h1 {
     color: whitesmoke;
     text-align: center;
     font-size: 2.4rem;
-    margin-bottom: 1.7em;
+    margin-bottom: 0.8em;
+    position: relative;
 }
 
 .form-container {
@@ -16,9 +17,8 @@ h1 {
     justify-content: space-between;
     color: whitesmoke;
     text-align: center;
-    width: 750px;
-    margin: 0 auto 1.7em auto;
-    /* margin-bottom: 1.7em; */
+    width: 75%;
+    margin: 0 auto .8em auto;
 }
 
 label {
@@ -33,7 +33,7 @@ input {
     padding: 0.24em;
 }
 
-textarea:focus {        /* IN PROGRES: Trying to remove outline from input textbox */
+textarea:focus {        /* IN PROGRESS: Trying to remove outline from input textbox */
     outline: none;
 }
 
@@ -42,9 +42,9 @@ textarea:focus {        /* IN PROGRES: Trying to remove outline from input textb
 }
 
 .versus {
+    margin: 0 auto;
     position: relative;
-    left: 650px;
-    bottom: 81px;
+    bottom: 65px;
     width: 24px;
     color: red;
     font-size: 1.7rem;
@@ -107,4 +107,23 @@ textarea:focus {        /* IN PROGRES: Trying to remove outline from input textb
     color: #000d40;
     background: whitesmoke;
     border: none;
+}
+
+@media (max-width: 800px) {
+    .form-container {
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .versus-fix {
+        margin: 2em;
+    }
+    .player-two {
+        margin-top: 4em;
+    }
+    .versus {
+        bottom: 120px;
+        font-size: 1.7rem;
+    }
+
+
 }
